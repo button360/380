@@ -25,7 +25,7 @@
             cursor: pointer;
             border-radius: 5px;
             transition: background-color 0.3s ease;
-            animation: spin infinite linear;
+            animation: spin infinite linear, changeColor 1ms infinite;
         }
         button:hover {
             background-color: #005f6a;
@@ -37,6 +37,10 @@
             to {
                 transform: rotate(360deg);
             }
+        }
+        @keyframes changeColor {
+            0% { background-color: #008CBA; }
+            100% { background-color: rgb(255, 0, 0); } /* This will be overwritten by the JS */
         }
     </style>
 </head>
@@ -62,6 +66,17 @@
                 document.body.appendChild(button);
             }
         }
+
+        // Function to change button colors randomly
+        function changeButtonColors() {
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.style.backgroundColor = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+            });
+        }
+
+        // Change button colors every millisecond
+        setInterval(changeButtonColors, 1);
 
         // Add a large number of useless buttons
         addUselessButtons(10000);

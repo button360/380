@@ -25,25 +25,46 @@
             cursor: pointer;
             border-radius: 5px;
             transition: background-color 0.3s ease;
+            animation: spin infinite linear;
         }
         button:hover {
             background-color: #005f6a;
+        }
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
 <body>
     <script>
+        // Function to create a scrambled string
+        function getRandomString(length) {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+
         // Function to create and append useless buttons
         function addUselessButtons(count) {
             for (let i = 0; i < count; i++) {
                 const button = document.createElement('button');
-                button.innerText = 'Useless Button ' + (i + 1);
+                button.innerText = getRandomString(10);
+                // Assign a random duration for the spin animation
+                button.style.animationDuration = Math.random() * 2 + 0.5 + 's';
                 document.body.appendChild(button);
             }
         }
 
         // Add a large number of useless buttons
-        addUselessButtons(100000);
+        addUselessButtons(10000);
     </script>
 </body>
 </html>

